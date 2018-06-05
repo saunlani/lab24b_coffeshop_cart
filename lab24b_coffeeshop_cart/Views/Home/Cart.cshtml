@@ -1,0 +1,21 @@
+﻿@using lab24b_coffeeshop_cart.Models;
+@{
+                /**/
+
+                ViewBag.Title = "Cart";
+}
+
+<h2>Cart</h2>
+
+<ul>
+    @foreach (Item i in (List<Item>)(Session["Cart"]))
+    {
+        <li>@i.Name - $@i.Price</li>
+
+    }
+</ul>
+@ViewBag.subTotal<br />
+@ViewBag.tax<br />
+@ViewBag.grandTotal<br />
+<a href="~/Home/Clear"
+   class="btn btn-primary">Empty Cart</a>

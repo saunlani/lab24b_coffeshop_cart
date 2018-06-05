@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Register";
+}
+@using lab24b_coffeeshop_cart.Models;
+<head>
+    <script>
+        //checks for matching passwords
+        function check(input) {
+            if (input.value != document.getElementById('Password').value) {
+                input.setCustomValidity('Password Must be Matching.');
+            } else {
+                // input is valid -- reset the error message
+                input.setCustomValidity('');
+            }
+        }
+    </script>
+</head>
+
+<div class="container">
+    <div class="jumbotron">
+        <h2>Register</h2>
+
+        <div class="text">
+            We serve up suprises every week for our registered members. Receive offers and discounts on your favorite items,
+            points with every purchase!
+        </div>
+
+        @*User Registration Form*@
+        <div class="forms">
+            <form name="RegInfo" action="/Home/Confirmation" onsubmit="return validateForm()" method="get">
+                <br />
+                <fieldset>
+
+                    First Name:<br /><input type="text" name="FirstName" required /><br />
+                    Last Name:<br /><input type="text" name="LastName" required /><br />
+                    Birthdate:<br /><input type="date" name="BirthDate" required /><br />
+                    Email:<br /><input type="email" required name="Email" /><br />
+
+                    Phone Number (Format: (999)999-9999)<br /><input type="tel" pattern='[\(]\d{3}[\)]\d{3}[\-]\d{4}' name="Phone" required /><br />
+                    Password:<br /><input type="password" name="Password" required id="Password" /><br />
+                    Confirm Password:<br /><input type="password" name="_cpassword" required oninput="check(this)" /><br />
+                    Gender:<br /><input type="radio" onclick="sendGender()" name="Gender" value="male" required> Male<br>
+                    <input type="radio" onclick="sendGender()" name="_gender" value="female"> Female<br>
+                    <input type="checkbox" onchange="sendSubscribe()" name="Subscribe" value="subscribed">
+                    <label for="subscribeNews">Subscribe to newsletter?</label>
+                    <br />Favorite Coffee Drink:<br /><select name="FavDrink" required>
+                        <option value="Americano">Americano</option>
+                        <option value="Cappuccino">Cappuccino</option>
+                        <option value="Espresso">Espresso</option>
+                        <option value="Machiato">Machiato</option>
+                        <option value="DripCoffee">Drip Coffee</option>
+                        <option value="ChaiLatte">Chai Latte</option>
+                        <option value="IrishCoffee">Irish Coffee</option>
+                    </select>
+
+                    <br />Select a bag of coffee to receive a free voucher for:<br /><select name="FreeCoffee">
+                        @foreach (var c in ViewBag.CoffeeList)
+                        {
+                            <option value="@c.Name">@c.Name</option>
+                        }
+                    </select><br />
+                    <p><input type="checkbox" required name="terms"> I accept the <u>Terms and Conditions</u></p>
+                    <input type="submit" name="Register!" />
+                    <input type="reset" name="Reset" /><br />
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .forms {
+        margin: auto;
+    }
+</style>

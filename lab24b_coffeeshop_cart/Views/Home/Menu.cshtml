@@ -1,0 +1,54 @@
+﻿@using lab24b_coffeeshop_cart.Models;
+@{
+                /**/
+
+                ViewBag.Title = "Menu";
+}
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+
+@*<form action="~/Home/BookListByAuthor" method="get">
+    <label>
+        Search by author:
+        <input type="text" name="author" class="form-control" />
+    </label>
+    <input type="submit" value="Search by Author" class="btn btn-primary" />
+</form>
+<br />
+<form action="~/Home/BookListByStatus" method="get">
+    <label>
+        Search by status:
+        <select name="status">
+            @foreach (Status s in ViewBag.Statuses)
+            {
+            <option value="@s.StatusID">@s.Status1</option>
+            }
+        </select>
+    </label>
+    <input type="submit" value="Search by Status" class="btn btn-primary" />
+</form>*@
+
+<table class="table table-bordered">
+    <tr>
+        <th>Image</a></th>
+        <th><a href="~/Home/ItemListSorted?column=Name">Name</a></th>
+        <th><a href="~/Home/ItemListSorted?column=Price">Price</a></th>
+        <th><a href="~/Home/ItemListSorted?column=Quantity">Quantity</a></th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (Item i in ViewBag.Items)
+    {
+    <tr>
+        <td><img src="~/Content/@i.Image" /></td>
+        <td>@i.Name</td>
+        <td>$@i.Price</td>
+        <td>@i.Quantity</td>
+        <td>
+            <a href="~/Home/Add?id=@i.ID"
+               class="btn btn-primary">Add to Bag</a>
+        </td>
+    </tr>
+    }
+</table>
